@@ -1,0 +1,14 @@
+{
+    "development": {
+        "dialect": "sqlite",
+        "storage": "C:/Users/vkart/OneDrive/Desktop/sqlite/sqlite-tools-win-x64-3490000/sqlite.db"
+    },
+    "test": {
+         "dialect": "sqlite",
+        "storage": "C:/Users/vkart/OneDrive/Desktop/sqlite/sqlite-tools-win-x64-3490000/sqlite.db"
+    },
+    "production": {
+          "dialect": "sqlite",
+        "storage": "C:/Users/vkart/OneDrive/Desktop/sqlite/sqlite-tools-win-x64-3490000/sqlite.db"
+    }
+}

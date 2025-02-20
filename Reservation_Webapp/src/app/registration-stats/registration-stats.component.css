@@ -1,0 +1,49 @@
+
+.table-bordered th, .table-bordered td{    
+    padding: 10px 5px;
+    border-color: #c7c7c7 !important;
+}
+  
+.table-bordered th{
+    font-size:12px; 
+    vertical-align:top;  
+    text-align: center;  
+}
+  
+.table-bordered td{
+    font-size:10px; 
+    vertical-align:middle;
+    text-align: center; 
+}
+  
+thead {
+    position: sticky;
+    top: -1px;
+    z-index: 1;
+}
+
+th {
+    background-color: #343434;
+    color: #fff;
+}
+
+
+.form-control {
+	font-size: 10px; 
+    margin-left: 0px !important;
+}
+
+.form-group label {
+	font-size: 11px; 
+}
+
+td.viewCompliant a{
+    color: #000 !important;
+    font-weight: 600;
+}
+
+.viewCompliant a:hover{
+    font-weight: 800;
+    cursor: pointer;
+}
+
