@@ -1,65 +1,6 @@
-<!-- <div class="container">
-    <h1>Registration Stats</h1>
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let c of registrations">
-            <th scope="row">{{c.status}}</th>
-           
-          </tr>
-          
-        </tbody>
-      </table>
-</div> -->
-<!-- 
-<div class="row">
- 
-    <div class="col-md-12 text-center table-responsive">
-        <table class="table table-striped table-bordered table-hover " cellpadding="0" cellspacing="0">
-          <thead>
-            <tr>
-              <th>Sr No</th>
-              <th>Changed By</th>
-              <th>Action Taken</th>
-              <th>Change Done On</th>
-              <th>Change From IP</th>
-              <th >RollBack Done On</th>
-              <th >RollBack From IP</th>
-              <th >Operations</th>
-            </tr>
-          </thead>
-          <tbody> 
-            <tr *ngFor="let report of registrations | slice: (currentPage-1) * pageSize : (currentPage-1) * pageSize + pageSize ; index as i">
-              <td>{{i+1}}</td>
-              <td>{{report.status}}</td>
-              <td>{{report.roomId}}</td>
-              <td>{{report.stayTime}}</td>
-              <td>{{report.isTablePlan}}</td>
-              <td >{{report.feedbackHash}}</td>
-              <td >{{report.status}}</td>
-              <td >
-                <button class="btn btn-outline-primary" >Roll Back</button> 
-                <button disabled class="btn btn-outline-danger" >Roll Done</button> 
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <ngb-pagination [collectionSize]="registrations.length" [(page)]="currentPage" [maxSize]="5" [boundaryLinks]="true" />
-
-     </div>
-  </div>
-
--->
 
 <div class="separator-breadcrumb border-top"></div>
-<div class="row" id="AlertSentReport-table">
+<div class="row" >
   <div class="col-md-12">
     <div class="table-responsive tableScrollable">
       <table class="table table-striped table-bordered table-hover">

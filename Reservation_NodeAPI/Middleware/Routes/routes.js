@@ -38,22 +38,15 @@ router.get('/ReservationStats', function (req, res) {
   
   var query = "SELECT count(*) as cnt, strftime('%W',createdAt) as weekdays FROM reservations  WHERE  createdAt between '" + from_dt + "' AND '" + to_dt + "'   group by strftime('%W',createdAt); ";
 
-  sequelize.query(query, null, { raw: true }, {
-    EquipmentId: 1
-  })
-    .then((data) => {
-     
-      res.header("Content-Type", "application/json");
+ 
+    let dt= sequelize.query(query, null, { raw: true }).then(function (data) {
       if (data)
         res.status(200).send(data)
       else
         res.status(204).json(data)
-    })
-    .error(function (err) {
-      res.status(404).send(err)
-    });
-
-  res.header("Content-Type", "application/json");
+   }) .catch(err=> console.log( res.status(404).send(err)))
+  
+  
 
 
 })

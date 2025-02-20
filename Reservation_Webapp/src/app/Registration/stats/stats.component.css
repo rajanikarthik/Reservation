@@ -16,3 +16,25 @@
 .custom-day.faded {
     background-color: rgba(2, 117, 216, 0.5);
 }
+
+#breadcrumb {
+    font-size:11px;
+    background-color:#F2F2F2;
+    }
+    
+    #breadcrumb ul {
+    margin:0px;
+    margin-bottom:0px;
+    margin-left:4px;
+    list-style: none;
+    background-color:#F2F2F2;
+    }
+    
+    #breadcrumb .active {
+    color:#B3B3B3;
+    
+    }
+
+    #breadcrumb ul li{
+        float: left;
+    }

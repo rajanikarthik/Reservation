@@ -19,8 +19,8 @@ export class RegistrationServiceService {
     ))
   }
 
-  GetRegistrationStats(obj:HttpParams){
-    return(this.http.get(environment.baseUrl+ '/ReservationStats', {params:obj}).pipe(
+  GetRegistrationStats<T>(obj:HttpParams):Observable<T>{
+    return(this.http.get<T>(environment.baseUrl+ '/ReservationStats', {params:obj}).pipe(
       catchError((error)=>{ throw error}
     )
     

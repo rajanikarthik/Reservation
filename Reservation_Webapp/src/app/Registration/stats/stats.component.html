@@ -1,7 +1,7 @@
-<div class="card company-dashboard p-4" > 
+<div class="separator-breadcrumb border-top" > 
     <div class="row">
         <div class="col-md-12 map-container">
-
+			<div id="breadcrumb"> 
         
 <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" />
 
@@ -32,5 +32,6 @@
    [width]="GBwidth"
    [height]="GBheight">
 </google-chart>
+</div>
 </div>
 </div>

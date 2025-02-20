@@ -4,6 +4,18 @@ import { NgbDatepicker, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap'
 import { HttpEvent } from '@angular/common/http';
 import { RegistrationServiceService } from '../../Util/registration-service.service'
 import { HttpParams } from '@angular/common/http';
+import { never } from 'rxjs';
+
+interface resToken {
+  0: [],
+  1: []
+}
+
+interface cntObj {
+  cnt: 0,
+  weekdays: ''
+}
+
 
 @Component({
   selector: 'app-stats',
@@ -19,19 +31,12 @@ export class StatsComponent {
   fromDate: NgbDate = this.calendar.getToday();
   toDate: NgbDate | null = this.calendar.getNext(this.fromDate, 'd', 10);
 
-  
+
 
   // Group chart
   GBtitle = 'Registration Statistics';
   GBtype = ChartType.Bar;
-  /*GBdata = [
-    ["2012", 900, 390],
-    ["2013", 1000, 400],
-    ["2014", 1170, 440],
-    ["2015", 1250, 480],
-    ["2016", 1530, 540]
-  ];
-  GBcolumnNames = ['Year', 'Asia', 'Europe'];*/
+
   GBdata = [
     ["4", 900],
     ["5", 1000],
@@ -49,8 +54,8 @@ export class StatsComponent {
       minValue: 0
     }
   };
-  GBwidth = 550;
-  GBheight = 400;
+  GBwidth = 600;
+  GBheight = 500;
 
   constructor(private registerService: RegistrationServiceService) {
   }
@@ -102,11 +107,28 @@ export class StatsComponent {
       params = params.append('todt', to_dt);
 
       this.registerService.GetRegistrationStats(params).subscribe(res => {
-        console.log(res)
-  //      if(res)
-    //      this.GBdata.push([res.cnt, res.weekday])
-        
+        let reply: resToken = <resToken>res
+        let replyObj:cntObj
+        if (reply) {
+          //if(res[0])
+          console.log(reply[0])
+          let rt=reply[0];
+          this.GBdata = [];
+          rt.forEach(val=>{
+            if(typeof val==="object"){
+              replyObj=<cntObj>val
+              console.log(replyObj.cnt, replyObj.weekdays)
+              this.GBdata.push([replyObj.weekdays,replyObj.cnt])
+            }
+                      
+          })
+          
+        }
+        else
+          this.GBdata = [];
+
       })
+      console.log(this.GBdata)
     }
 
   }
