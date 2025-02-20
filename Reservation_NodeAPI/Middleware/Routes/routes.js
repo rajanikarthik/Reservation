@@ -35,14 +35,15 @@ router.get('/ReservationStats', function (req, res) {
   let from_dt = req.query.fromdt
   let to_dt = req.query.todt
   let resarr = [];
-  const sql = require('@sequelize/core');
+  
   var query = "SELECT count(*) as cnt, strftime('%W',createdAt) as weekdays FROM reservations  WHERE  createdAt between '" + from_dt + "' AND '" + to_dt + "'   group by strftime('%W',createdAt); ";
 
   sequelize.query(query, null, { raw: true }, {
     EquipmentId: 1
   })
     .then((data) => {
-
+     
+      res.header("Content-Type", "application/json");
       if (data)
         res.status(200).send(data)
       else
