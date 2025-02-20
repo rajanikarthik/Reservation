@@ -61,74 +61,76 @@ export class StatsComponent {
   }
 
   onDateSelection(date: NgbDate) {
-    let year, month, day, from_dt = '', to_dt = '';
+    try {
+      let year, month, day, from_dt = '', to_dt = '';
 
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
-    }
-    if (this.fromDate) {
-      year = this.fromDate.year
-      if (this.fromDate.month < 10)
-        month = "0" + this.fromDate.month
-      else
-        month = this.fromDate.month
-      if (this.fromDate.day < 10)
-        day = "0" + this.fromDate.day
-      else
-        day = this.fromDate.day
-
-      from_dt = year + "-" + month + "-" + day
-      console.log("from_dt: " + from_dt)
-    }
-
-    if (this.toDate) {
-      year = this.toDate.year
-      if (this.toDate.month < 10)
-        month = "0" + this.toDate.month
-      else
-        month = this.toDate.month
-      if (this.toDate.day < 10)
-        day = "0" + this.toDate.day
-      else
-        day = this.toDate.day
-
-      to_dt = year + "-" + month + "-" + day
-      console.log("to_dt: " + to_dt)
-    }
-
-    if (this.fromDate && this.toDate) {
-      let params = new HttpParams();
-      params = params.append('fromdt', from_dt);
-      params = params.append('todt', to_dt);
-
-      this.registerService.GetRegistrationStats(params).subscribe(res => {
-        let reply: resToken = <resToken>res
-        let replyObj:cntObj
-        if (reply) {
-          //if(res[0])
-          console.log(reply[0])
-          let rt=reply[0];
-          this.GBdata = [];
-          rt.forEach(val=>{
-            if(typeof val==="object"){
-              replyObj=<cntObj>val
-              console.log(replyObj.cnt, replyObj.weekdays)
-              this.GBdata.push([replyObj.weekdays,replyObj.cnt])
-            }
-                      
-          })
-          
-        }
+      if (!this.fromDate && !this.toDate) {
+        this.fromDate = date;
+      } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+        this.toDate = date;
+      } else {
+        this.toDate = null;
+        this.fromDate = date;
+      }
+      if (this.fromDate) {
+        year = this.fromDate.year
+        if (this.fromDate.month < 10)
+          month = "0" + this.fromDate.month
         else
-          this.GBdata = [];
+          month = this.fromDate.month
+        if (this.fromDate.day < 10)
+          day = "0" + this.fromDate.day
+        else
+          day = this.fromDate.day
 
-      })
-      console.log(this.GBdata)
+        from_dt = year + "-" + month + "-" + day
+
+      }
+
+      if (this.toDate) {
+        year = this.toDate.year
+        if (this.toDate.month < 10)
+          month = "0" + this.toDate.month
+        else
+          month = this.toDate.month
+        if (this.toDate.day < 10)
+          day = "0" + this.toDate.day
+        else
+          day = this.toDate.day
+
+        to_dt = year + "-" + month + "-" + day
+
+      }
+
+      if (this.fromDate && this.toDate) {
+        let params = new HttpParams();
+        params = params.append('fromdt', from_dt);
+        params = params.append('todt', to_dt);
+
+        this.registerService.GetRegistrationStats(params).subscribe(res => {
+          let reply: resToken = <resToken>res
+          let replyObj: cntObj
+          if (reply) {
+
+            let rt = reply[0];
+            this.GBdata = [];
+            rt.forEach(val => {
+              if (typeof val === "object") {
+                replyObj = <cntObj>val
+                this.GBdata.push([replyObj.weekdays, replyObj.cnt])
+              }
+
+            })
+
+          }
+          else
+            this.GBdata = [];
+
+        })
+
+      }
+    } catch (err) {
+      console.log(err)
     }
 
   }

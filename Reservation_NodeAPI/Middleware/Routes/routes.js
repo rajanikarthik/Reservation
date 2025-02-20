@@ -4,12 +4,14 @@ const sequelize = require('../../Models/DBConnection');
 const reservations = require('../../Models/Reservation.model');
 var router = express.Router();
 
-router.get('/GetAllRegistration', function (req, res) {
-
-
-  Reservation.findAll().then(reservation => {
-    res.status(200).json(reservation);
-  });
+router.get('/GetAllRegistration', function (req, res, next) {
+  try {
+    Reservation.findAll().then(reservation => {
+      res.status(200).json(reservation);
+    });
+  } catch (err) {
+    next(err)
+  }
   /* Below query is to manage pagination from serverside ORM 
     page=req.query.page
      let limit = 10;
@@ -31,22 +33,25 @@ router.get('/GetAllRegistration', function (req, res) {
 
 });
 
-router.get('/ReservationStats', function (req, res) {
+router.get('/ReservationStats', function (req, res, next) {
   let from_dt = req.query.fromdt
   let to_dt = req.query.todt
   let resarr = [];
-  
-  var query = "SELECT count(*) as cnt, strftime('%W',createdAt) as weekdays FROM reservations  WHERE  createdAt between '" + from_dt + "' AND '" + to_dt + "'   group by strftime('%W',createdAt); ";
 
- 
-    let dt= sequelize.query(query, null, { raw: true }).then(function (data) {
+  try {
+    var query = "SELECT count(*) as cnt, strftime('%W',createdAt) as weekdays FROM reservations  WHERE  createdAt between '" + from_dt + "' AND '" + to_dt + "'   group by strftime('%W',createdAt); ";
+
+
+    let dt = sequelize.query(query, null, { raw: true }).then(function (data) {
       if (data)
         res.status(200).send(data)
       else
         res.status(204).json(data)
-   }) .catch(err=> console.log( res.status(404).send(err)))
-  
-  
+    }).catch(err => console.log(res.status(404).send(err)))
+
+  } catch (err) {
+    next(err)
+  }
 
 
 })
